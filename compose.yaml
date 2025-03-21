@@ -1,0 +1,21 @@
+services:
+  postgresql-master:
+    image: 'bitnami/postgresql:17.4.0'
+    ports:
+      - '5412:5432'
+    volumes:
+      - 'postgresql_master_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_USERNAME=journal
+      - POSTGRESQL_PASSWORD=journal
+      - POSTGRESQL_DATABASE=journal
+  # server:
+  #   build:
+  #     context: .
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 8990:8990
+
+volumes:
+  postgresql_master_data:
