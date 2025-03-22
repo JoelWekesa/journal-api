@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpsertUserDto } from './dto/upsert-user.dto';
-import bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -9,6 +10,17 @@ export class AuthService {
 
     async upsertUser(data: UpsertUserDto) {
         const { email, name, password } = data;
+
+
+        if (password) {
+            const user = await this.prisma.user.findUnique({
+                where: { email }
+            })
+
+            if (user && !bcrypt.compareSync(password, user.password)) {
+                throw new BadRequestException('Invalid email or password')
+            }
+        }
 
         const rest = {
             name,
@@ -19,7 +31,12 @@ export class AuthService {
             where: { email },
             update: rest,
             create: { email, ...rest },
-        }).then(data => data).catch(err => {
+        }).then(async data => {
+            const token = jwt.sign({ email: data.email }, process.env.JWT_SECRET, { expiresIn: '1d' })
+            return {
+                ...data, token
+            }
+        }).catch(err => {
             throw new BadRequestException(err)
         })
 
