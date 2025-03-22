@@ -18,19 +18,21 @@ export class AuthMiddleware implements NestMiddleware {
 
     const token = header.split(' ')[1];
 
-    const valid = await jwt.verifyAsync(token).then(data => data).catch((err) => {
-      console.error(err); //TODO implement logger
-      return null;
-    });
+    try {
+      const valid = jwt.verify(token, process.env.JWT_SECRET) as { id: string };
 
-    if (!valid) {
+      const { id } = valid;
+
+
+      await this.userHelper.setUser(id);
+
+      next();
+
+
+    } catch (error) {
       throw new UnauthorizedException('Invalid token');
     }
 
-    const { id } = valid;
 
-    await this.userHelper.setUser(id);
-
-    next();
   }
 }

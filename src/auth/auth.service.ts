@@ -32,7 +32,7 @@ export class AuthService {
             update: rest,
             create: { email, ...rest },
         }).then(async data => {
-            const token = jwt.sign({ email: data.email }, process.env.JWT_SECRET, { expiresIn: '1d' })
+            const token = jwt.sign({ id: data.id }, process.env.JWT_SECRET, { expiresIn: '1d' })
             return {
                 ...data, token
             }
