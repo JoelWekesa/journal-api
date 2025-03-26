@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserHelper } from 'src/helpers/user';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create.dto';
+import { EditCategoryDto } from './dto/edit.dto';
 
 @Injectable()
 export class CategoryService {
@@ -32,6 +33,14 @@ export class CategoryService {
                 userId
             },
 
+            include: {
+                _count: {
+                    select: {
+                        Journal: true
+                    }
+                }
+            },
+
             orderBy: {
                 createdAt: 'desc'
             }
@@ -40,5 +49,34 @@ export class CategoryService {
         });
 
         return categories
+    }
+
+    async editCategory(data: EditCategoryDto) {
+        const edit = await this.prisma.category.update({
+            where: {
+                id: data.id
+            },
+
+            data: {
+                ...data
+            }
+        }).then(data => data).catch(err => {
+            throw new BadRequestException(err);
+        });
+
+        return edit
+    }
+
+    async deleteCategory(data: EditCategoryDto) {
+        const deleted = await this.prisma.category.delete({
+            where: {
+                id: data.id
+            }
+        }).then(data => data).catch(err => {
+            throw new BadRequestException(err);
+        }
+        );
+
+        return deleted
     }
 }
