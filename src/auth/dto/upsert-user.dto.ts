@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString, Matches } from "class-validator";
-import { passwordRegex } from "src/utils/pass-regex";
+import { passwordRegex } from "../../utils/pass-regex";
 
 export class UpsertUserDto {
     @IsNotEmpty()

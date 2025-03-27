@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserHelper } from 'src/helpers/user';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { UserHelper } from '../helpers/user';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateJournalDto } from './dto/create.dto';
 import { EditJournalDto } from './dto/edit.dto';
 

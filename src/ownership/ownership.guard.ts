@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable, ForbiddenException } from '@
 import { Reflector } from '@nestjs/core';
 import { PrismaService } from '../prisma/prisma.service';
 import { Request } from 'express';
-import { UserHelper } from 'src/helpers/user';
+import { UserHelper } from '../helpers/user';
 
 @Injectable()
 export class OwnershipGuard implements CanActivate {

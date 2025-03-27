@@ -1,9 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { JournalsService } from './journals.service';
 import { JournalsController } from './journals.controller';
-import { AuthMiddleware } from 'src/auth/auth.middleware';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { UserHelper } from 'src/helpers/user';
+import { AuthMiddleware } from '../auth/auth.middleware';
+import { PrismaService } from '../prisma/prisma.service';
+import { UserHelper } from '../helpers/user';
 
 @Module({
   controllers: [JournalsController],

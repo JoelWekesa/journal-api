@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { UserHelper } from 'src/helpers/user';
+import { UserHelper } from '../helpers/user';
 import * as jwt from 'jsonwebtoken';
 
 

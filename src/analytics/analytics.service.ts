@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserHelper } from 'src/helpers/user';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { UserHelper } from '../helpers/user';
+import { PrismaService } from '../prisma/prisma.service';
 import * as dayjs from 'dayjs';
 import { YearFreqDto } from './dto/year-freq';
 
@@ -84,9 +84,9 @@ export class AnalyticsService {
             where: {
                 userId
             }
-        }).catch(err => {
+        }).then(data => data).catch(err => {
             throw new BadRequestException(err);
-        });
+        })
 
         return {
             totalJournals

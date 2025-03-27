@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Patch, Post, Query, UseGuards } from '@n
 import { JournalsService } from './journals.service';
 import { CreateJournalDto } from './dto/create.dto';
 import { EditJournalDto } from './dto/edit.dto';
-import { OwnershipGuard } from 'src/ownership/ownership.guard';
-import { SetOwnershipModel } from 'src/ownership/ownership.decorator';
+import { OwnershipGuard } from '../ownership/ownership.guard';
+import { SetOwnershipModel } from '../ownership/ownership.decorator';
 
 @Controller('journals')
 export class JournalsController {

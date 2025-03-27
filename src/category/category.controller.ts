@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Patch, Post, Query, UseGuards } from '@n
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create.dto';
 import { EditCategoryDto } from './dto/edit.dto';
-import { OwnershipGuard } from 'src/ownership/ownership.guard';
-import { SetOwnershipModel } from 'src/ownership/ownership.decorator';
+import { OwnershipGuard } from '../ownership/ownership.guard';
+import { SetOwnershipModel } from '../ownership/ownership.decorator';
 
 @Controller('categories')
 export class CategoryController {

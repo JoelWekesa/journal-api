@@ -1,9 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AnalyticsService } from './analytics.service';
 import { AnalyticsController } from './analytics.controller';
-import { UserHelper } from 'src/helpers/user';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { AuthMiddleware } from 'src/auth/auth.middleware';
+import { UserHelper } from '../helpers/user';
+import { PrismaService } from '../prisma/prisma.service';
+import { AuthMiddleware } from '../auth/auth.middleware';
 
 @Module({
   controllers: [AnalyticsController],
